@@ -1,2 +1,2 @@
 # network
-cs50 project4 twitter like site social network website for making posts and following users.
+cs50 project4 twitter like social network website for making posts and following users.
