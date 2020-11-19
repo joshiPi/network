@@ -1,0 +1,67 @@
+{% extends "network/layout.html" %}
+{% block body %}
+
+<div class="container">
+    <div id="message" style="margin-bottom: 10px;"></div>
+    <!-- <div class="alert alert-success alert-dismissible fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{message}}
+    </div> -->
+    <div style="margin-bottom: 40px;" id="profile">
+        <h2 id="user_name">{{user.username}}</h2>
+
+        <p id="following_count"><strong>follows:</strong>{{user.following.count}} users</p>
+        <p id="followed_count"><strong>following:</strong>{{user.follower.count}} users</p>
+        {% if request.user.is_authenticated %}
+        <div id="buttons">
+            <button id="follow">Follow</button>
+            <button id="unfollow">Unfollow</button>
+        </div>
+        {% endif %}
+    </div>
+    <div>
+        <h3> Blogs </h3>
+        {% for blog in page_obj %}
+
+        <div id="blog">
+            <p><strong>Author</strong> {{ blog.post_by }}</p>
+            <p><strong>Created On</strong>{{blog.created_at}}</p>
+            <a id="edit">Edit</a>
+            <div id="content">{{blog.post_content}}</div>
+            <p id="hidden_id">{{ blog.id }}</p>
+            <p id="like_counter"><a id="like_button"><i class='fas fa-heart'
+                        style='font-size:20px;color:red'></i>{{blog.post_likes}}</a>
+            </p>
+
+
+        </div>
+
+        {% empty %}
+        <h4>Users have never written any blogs yet</h4>
+        {% endfor %}
+    </div>
+</div>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% if request.user.is_authenticated %}
+<script>
+    document.querySelector("#follow").addEventListener('click', () => follow_unfollow("follow"))
+    document.querySelector("#unfollow").addEventListener('click', () => follow_unfollow("unfollow"))
+</script>
+{% endif %}
+{% endblock %}

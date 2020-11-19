@@ -1,0 +1,62 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<!-- Create Post View -->
+{% if user.is_authenticated %}
+<div class="container">
+    {% if message %}
+    <div>{{message}}</div>
+    <!-- <div class="alert alert-success alert-dismissible fade in">
+         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+         <strong>Success!</strong> {{message}}
+       </div> -->
+    {% endif %}
+    <div class="create_post">
+        <h3 id="create">Create Post</h3>
+        <form action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea name="content"></textarea>
+            </div>
+            <input class="btn btn-primary" type="submit" value="create">
+        </form>
+
+    </div>
+</div>
+{% endif %}
+<div class="container" id="blogs">
+    {% for blog in page_obj %}
+    <div id="blog">
+        <p><strong>Author</strong> <a id="author" href="{% url 'user_profile' blog.post_by %}">{{ blog.post_by }}</a>
+        </p>
+        <p><strong>Created On</strong>{{blog.created_at}}</p>
+        <!-- //{% url 'edit' blog.post_by blog.id %} -->
+        <a id="edit">Edit</a>
+        <div id="content">{{blog.post_content}}</div>
+        <p id="hidden_id">{{ blog.id }}</p>
+        <p id="like_counter"><a id="like_button"><i class='fas fa-heart'
+                    style='font-size:20px;color:red'></i>{{blog.post_likes}}</a>
+        </p>
+
+
+    </div>
+    {% endfor %}
+</div>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
