@@ -9,7 +9,7 @@
     </div> -->
     <div style="margin-bottom: 40px;" id="profile">
         <h2 id="user_name">{{user.username}}</h2>
-
+        <p id="blog_count"><strong>blogs:</strong>{{ user.created_by.count }}</p>
         <p id="following_count"><strong>follows:</strong>{{user.following.count}} users</p>
         <p id="followed_count"><strong>following:</strong>{{user.follower.count}} users</p>
         {% if request.user.is_authenticated %}
