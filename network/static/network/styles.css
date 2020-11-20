@@ -57,8 +57,9 @@ textarea:focus{
 
 }
 #buttons{
-    margin-top: 3rem;
+    margin-top: 1rem;
 }
+
 #follow,#unfollow{
     width: 10rem;
     border-radius: 10px;
@@ -67,12 +68,15 @@ textarea:focus{
     height: 2.6rem;
 
 }
+#follow,#unfollow:focus{
+    outline:none;
+}
 #all_post{
     cursor: pointer;
 }
 .pagination{
-    justify-content: center;
-    align-items: center;
+    margin-left: 50%;
+    transform: translate(-50%);
 }
 #hidden_id{
     display:none;

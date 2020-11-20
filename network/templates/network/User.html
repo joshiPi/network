@@ -41,7 +41,31 @@
         {% endfor %}
     </div>
 </div>
-<div class="pagination">
+{% include "network/pagination.html" %}
+<!-- test -->
+<!-- <div class="pagination">
+    <span class="step-links" style="font-size: x-large;">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number}}">
+            <span class="glyphicon glyphicon-chevron-left	
+            "></span></a>
+        {% endif %}
+        <span class="current">
+            {{page_obj.number}}
+
+        </span>
+        {% if page_obj.has_next %}
+        <a href="?page={{page_obj.next_page_number}}">
+            <span class="glyphicon glyphicon-chevron-right	
+            "></span>
+        </a>
+        {% endif %}
+
+    </span>
+</div> -->
+<!-- test end -->
+<!-- default pagination -->
+<!-- <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
         <a href="?page=1">&laquo; first</a>
@@ -57,7 +81,7 @@
         <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
         {% endif %}
     </span>
-</div>
+</div> -->
 {% if request.user.is_authenticated %}
 <script>
     document.querySelector("#follow").addEventListener('click', () => follow_unfollow("follow"))
