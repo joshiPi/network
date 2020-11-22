@@ -8,7 +8,7 @@ cs50 project4 twitter like social network website for making posts and following
 - **New Post:** Users who are signed in are able to write a new text-based post by filling in text into a text area and then clicking a button to submit the post.
 
 - **All Posts:** The “All Posts” link in the navigation bar takes the user to a page where they can see all posts from all users, with the most recent posts first.
-  -Each post includes the username of the poster, the post content itself, the date and time at which the post was made, and the number of “likes” the post has and ability to like    and dislike it.
+  -Each post includes the username of the poster, the post content itself, the date and time at which the post was made, and the number of “likes” the post has and ability to like and unlike it.
 
 - **Profile Page:** Clicking on a username loads that user’s profile page. This page includes:
   -The number of followers the user has, as well as the number of people that the user follows.

@@ -13,6 +13,11 @@ import json
 
 
 def index(request):
+    """
+    function returns index page and if request is post it creates the new post
+    for current logged in user.
+
+    """
     blogs = Post.objects.all()
     blogs = blogs[::-1]
     paginator = Paginator(blogs, 10)
@@ -94,6 +99,15 @@ def register(request):
 
 @csrf_exempt
 def edit_post(request, user, pk):
+    """
+    *returns JSON response so that javascript can detect whether to update the DOM or not
+
+    allows user to edit post since the website is not reloaded 
+    csrf exempt is used and value of edited post is saved in database
+    but the actual value is not reflected until the page loads,
+    using javascript value of that post is updated by manipulating DOM and when user reloads 
+    the actual value is reflected.
+    """
     if request.method == "POST":
         data = json.loads(request.body)
         content = data.get("content", "")
@@ -114,6 +128,9 @@ def edit_post(request, user, pk):
 
 
 def all_post(request):
+    """
+    Shows all post for all the users .
+    """
     blogs = Post.objects.all()
     blogs = blogs[::-1]
     paginator = Paginator(blogs, 10)
@@ -125,6 +142,10 @@ def all_post(request):
 
 
 def all_following_post(request):
+    """
+    shows only those post which are written by the users 
+    that the currently logged-in user follows.
+    """
     name = request.user.username
     user = User.objects.get(username=name)
     follows = user.following.all()
@@ -147,6 +168,12 @@ def all_following_post(request):
 
 
 def like_unlike(request, pk):
+    """
+    *returns JSON response so that javascript can detect whether to update the DOM or not
+
+    user can like and unlike post.
+
+    """
     try:
         post = Post.objects.get(id=pk)
         user = User.objects.get(id=request.user.id)
@@ -184,6 +211,12 @@ def user_profile(request, user):
 
 
 def follow_unfollow(request, query, user):
+    """
+    *returns JSON response so that javascript can detect whether to update the DOM or not
+
+    let user folllow and unfollow any other user
+    also checks that user cannot follow himself
+    """
     user = User.objects.get(username=user)
     user_who_wants = User.objects.get(id=request.user.id)
     if request.user.username == user.username:
