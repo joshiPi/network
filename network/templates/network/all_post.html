@@ -1,7 +1,7 @@
 {% extends "network/layout.html" %}
 {% block body %}
 {% if message %}
-<div>{{ message }}</div>
+<div class="container" style="font-size: xx-large;text-align:center">{{ message }}</div>
 {% endif %}
 <div class="container" id="blogs">
     {% for blog in page_obj %}
