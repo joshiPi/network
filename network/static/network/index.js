@@ -1,21 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    // document.querySelector("#all_post").addEventListener('click', () => {
-    //     document.addEventListener('DOMContentLoaded', () => {
-
-    //         document.querySelector("#all_post").style.background = "grey";
-
-    //     })
-    // })
+    //function to let user like apost
     const like = document.querySelectorAll("#like_button")
     like.forEach(element => {
         element.addEventListener('click', () => {
-            //console.log('like')
             const id = parseInt(element.parentElement.previousElementSibling.innerHTML);
             fetch(`/like_unlike/${id}`)
                 .then(response => response.json())
                 .then(result => {
-                    //console.log(result)
                     if (result["error"] == "not found.") {
                         window.alert("login to like post")
                     }
@@ -26,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         element.innerHTML = `<i class='fas fa-heart' style='font-size:20px;color:lightgrey'></i>${result["like_count"]}`
                     }
                 })
-            //then(console.log("sucess"))
 
         })
     })
@@ -36,13 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
         element.addEventListener('click', () => editBlog(element))
     })
 
-    //if event listners to null are defined in index.js so declare them at last so it won't mess with anyother functions declared before it.
-    // document.querySelector("#follow").addEventListener('click', () => follow_unfollow("follow"))
-    // document.querySelector("#unfollow").addEventListener('click', () => follow_unfollow("unfollow"))
-
 
 })
 
+//function for letting user follow and unfollow other users
 function follow_unfollow(query) {
     const a = document.querySelector("#user_name").innerText;
     fetch(`../follow_unfollow/${query}/${a}`)
@@ -68,6 +55,7 @@ function follow_unfollow(query) {
     </div>`
         })
 }
+
 
 function editBlog(element) {
     const b = element.parentElement
@@ -103,11 +91,9 @@ function editBlog(element) {
                         });
                     event.preventDefault();
                 })
-                //new_div.children[1].addEventListener('click', () => { console.log("upadate") })
 
             }
             if (result["message"] == "not_ok") {
-                //document.querySelector("#main_message").innerText = "you can not update someoneelse Post"
                 window.alert("you can not edit someone else post")
             }
         })
